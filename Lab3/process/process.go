@@ -17,3 +17,7 @@ func newProcess(ID int, Table []pageTableEntries.PageTableEntries, WorkingSet []
 		WorkingSet: WorkingSet,
 	}
 }
+
+func (*Process) Work() error{
+	return nil
+}

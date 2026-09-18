@@ -9,3 +9,4 @@ func NewMemoryManagementUnit(algorithm string) *MemoryManagementUnit{
 		algorithm: algorithm,
 	}
 }
+

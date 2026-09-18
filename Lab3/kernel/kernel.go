@@ -1,9 +1,10 @@
 package kernel
 
 import (
-	"Lab3/process"
-	"Lab3/memoryManagementUnit"
 	"Lab3/frame"
+	"Lab3/memoryManagementUnit"
+	"Lab3/process"
+	"fmt"
 )
 
 type Kernel struct{
@@ -17,20 +18,20 @@ func NewKernel(p process.Process, mmu memoryManagementUnit.MemoryManagementUnit,
 	for index := range frameNumber {
    	frames = append(frames, frame.NewFrame(index))
 	}
-
-
 	return &Kernel{
 		Process: &[]process.Process{p},
-		MemoryManagementUnit: memoryManagementUnit.MemoryManagementUnit{},
+		MemoryManagementUnit: mmu,
 		PhysicalFrames: &frames,
 	}
 }
 
-func (*Kernel) Start(algorithm string, filename string) string{
-	if algorithm == "random"{
+func (k *Kernel) Start() int{
+	for true{
+		fmt.Println("Working with New Process")
 		
-	} else{
+		p := (*k.Process)[0]
+		p.Work()
 
 	}
-	return "1"
+	return 0
 }
