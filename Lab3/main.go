@@ -5,7 +5,6 @@ import (
 	"fmt"
 	"os"
 	"strings"
-	"Lab3/core"
 )
 
 func runRandomAlgorithm() {
@@ -38,8 +37,5 @@ func main() {
 		flag.Usage() // Prints the automatic help message
 		os.Exit(1)   // Exits the application with an error code
 	}
-
-	core := core.NewCore()
-	core.Start("cool", "cool")
 }
 
