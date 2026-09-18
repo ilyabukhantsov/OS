@@ -6,14 +6,20 @@ import(
 
 type Process struct{
 			ID int
-			Table []pageTableEntries.PageTableEntries
+			RemainingLife int
+			Table []*pageTableEntries.PageTableEntries
 			WorkingSet []int
 }
 
-func newProcess(ID int, Table []pageTableEntries.PageTableEntries, WorkingSet []int) *Process{
+func newProcess(ID int, RemainingLife int,  StartFrom int, numberOfPage int, WorkingSet []int) *Process{
+	arrayOfPages := []*pageTableEntries.PageTableEntries{}
+	for index := range numberOfPage{
+		arrayOfPages = append(arrayOfPages, pageTableEntries.NewPageTableEntries(index + StartFrom))
+	}
 	return &Process{
 		ID: ID,
-		Table: Table,
+		RemainingLife: RemainingLife,
+		Table: arrayOfPages,
 		WorkingSet: WorkingSet,
 	}
 }
