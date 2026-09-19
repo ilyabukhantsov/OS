@@ -1,17 +1,21 @@
 package pageTableEntries
 
 type PageTableEntries struct {
-    Presence bool
-    Reference bool
-    Modification bool
-    PhysicalPageNumber  int
+	VirtualPageNumber   int
+	PhysicalFrameNumber int
+	Present             bool
+	Referenced          bool
+	Modified            bool
+	InFS                bool // Is page saved
 }
 
-func NewPageTableEntries(PhysicalPageNumber int) *PageTableEntries{
+func NewPageTableEntries(vpage int) *PageTableEntries {
 	return &PageTableEntries{
-		Presence: false,
-		Reference: false,
-		Modification: false,
-		PhysicalPageNumber: PhysicalPageNumber,
+		VirtualPageNumber:   vpage,
+		PhysicalFrameNumber: -1,
+		Present:             false,
+		Referenced:          false,
+		Modified:            false,
+		InFS:                false,
 	}
 }
