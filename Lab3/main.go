@@ -1,41 +1,25 @@
 package main
 
 import (
-	"flag"
+	"Lab3/kernel"
+	"Lab3/memoryManagementUnit"
+	"Lab3/process"
 	"fmt"
-	"os"
-	"strings"
 )
 
-func runRandomAlgorithm() {
-	fmt.Println("[MMU] Executing Random Page Replacement algorithm...")
-}
-
-func runClockAlgorithm() {
-	fmt.Println("[MMU] Executing Clock (Second Chance) algorithm...")
-}
-
 func main() {
-	frames := flag.Int("frames", 32, "number of frames")
-	algoPtr := flag.String("algo", "Random", "MMU algorithm: Random, Clock")
+	fmt.Println("--- Starting OS Virtual Memory Simulator ---")
 
-	flag.Parse()
+	mmu := memoryManagementUnit.NewMemoryManagementUnit()
 
-	algorithm := strings.ToLower(*algoPtr)
+	sysKernel := kernel.NewKernel(mmu, 4, "nru")
 
-	switch algorithm {
-	case "random":
-		fmt.Println("Selected Algorithm: Random ", frames)
-		runRandomAlgorithm()
+	p1 := process.NewProcess(1, 50, 16, mmu)
+	p2 := process.NewProcess(2, 50, 16, mmu)
 
-	case "clock":
-		fmt.Println("Selected Algorithm: Clock ", frames)
-		runClockAlgorithm()
+	sysKernel.AddProcess(p1)
+	sysKernel.AddProcess(p2)
 
-	default:
-		fmt.Fprintf(os.Stderr, "Error: unknown MMU algorithm '%s'\n", *algoPtr)
-		flag.Usage() // Prints the automatic help message
-		os.Exit(1)   // Exits the application with an error code
-	}
+	sysKernel.Start()
 }
 

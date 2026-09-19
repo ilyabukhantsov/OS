@@ -1,18 +1,19 @@
 package frame
 
-import "Lab3/process"
-
 type Frame struct {
-    Number            int
-    Owner             *process.Process
-    VirtualPageNumber int
+	Number            int
+	OwnerPID          int
+	VirtualPageNumber int
 }
 
 func NewFrame(number int) Frame {
-    return Frame{
-        Number:            number,
-        Owner:             nil,
-        VirtualPageNumber: -1,
-    }
+	return Frame{
+		Number:            number,
+		OwnerPID:          -1,
+		VirtualPageNumber: -1,
+	}
 }
 
+func (f *Frame) IsFree() bool {
+	return f.OwnerPID == -1
+}
